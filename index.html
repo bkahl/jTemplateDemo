@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<!-- Not Valid XHTML 1.1 ! -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <title>jQuery jTemplates Demo</title>
+
+		<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery-jtemplates.js"></script>
+        <script type="text/javascript">
+			$(document).ready(function() {
+			    var data = [
+			                  { ID: 1, FirstName: 'Anne', Email: 'anne@domain.com' },
+			                  { ID: 2, FirstName: 'Amelie', Email: 'amelie@domain.com' },
+			                  { ID: 3, FirstName: 'Polly', Email: 'polly@domain.com' },
+			                  { ID: 4, FirstName: 'Alice', Email: 'alice@domain.com' },
+			                  { ID: 5, FirstName: 'Martha', Email: 'martha@domain.com' }
+			               ];
+
+			    $("#jTemplateDemo").setTemplateElement("templateHolder");
+			    $("#jTemplateDemo").processTemplate(data);
+			});
+        </script>
+    </head>
+    <body>
+
+        <p>jQuery jTemplates Demo</p>
+
+		<textarea id="templateHolder" style="display:none;">
+		    <table border="1">
+		        <tr>
+		            <th>
+		                First Name
+		            </th>
+		            <th>
+		                Last Name
+		            </th>
+		        </tr>
+		        {#foreach $T as record} 
+		          <tr>
+		              <td>
+		                  {$T.record.FirstName}
+		              </td>
+		              <td>
+		                  {$T.record.Email}
+		              </td>
+		          </tr>
+		        {#/for}
+		    </table>
+		</textarea>
+		<div id="jTemplateDemo"></div>
+
+    </body>
+</html>
