@@ -3,23 +3,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
         <title>jQuery jTemplates Demo</title>
-		<link rel='stylesheet' href='css/fdic-template.css'>
-		<link rel='stylesheet' href='css/fdic-index.css'>
 		<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 		<script type="text/javascript" src="js/jquery-jtemplates.js"></script>
         <script type="text/javascript">
 			$(document).ready(function() {
-				// var jTemplates = {
-				// 	temp_1 : {
-				// 		data : [{ ID: 1, FirstName: 'Anne', Email: 'anne@domain.com' },
-				//                 { ID: 2, FirstName: 'Amelie', Email: 'amelie@domain.com' },
-				//                 { ID: 3, FirstName: 'Polly', Email: 'polly@domain.com' },
-				//                 { ID: 4, FirstName: 'Alice', Email: 'alice@domain.com' },
-				//                 { ID: 5, FirstName: 'Martha', Email: 'martha@domain.com' }],
-				// 		jTemp : '<table id="templateHolder" border="1" style="display:none;"> <tr> <th>First Name</th> <th>Last Name</th> </tr> {#foreach $T as record} <tr> <td>{$T.record.FirstName}</td> <td>{$T.record.Email}</td> </tr> {#/for} </table>',
-				// 		jTemp_old_way : '<textarea id="templateHolder" style="display:none;"> <table border="1"> <tr> <th>First Name</th> <th>Last Name</th> </tr> {#foreach $T as record} <tr> <td>{$T.record.FirstName}</td> <td>{$T.record.Email}</td> </tr> {#/for} </table> </textarea>' 
-				// 	}
-				// };
+				var jTemplates = {
+					temp_1 : {
+						data : [{ ID: 1, FirstName: 'Anne', Email: 'anne@domain.com' },
+				                { ID: 2, FirstName: 'Amelie', Email: 'amelie@domain.com' },
+				                { ID: 3, FirstName: 'Polly', Email: 'polly@domain.com' },
+				                { ID: 4, FirstName: 'Alice', Email: 'alice@domain.com' },
+				                { ID: 5, FirstName: 'Martha', Email: 'martha@domain.com' }],
+						jTemp : '<table id="templateHolder" border="1" style="display:none;"> <tr> <th>First Name</th> <th>Last Name</th> </tr> {#foreach $T as record} <tr> <td>{$T.record.FirstName}</td> <td>{$T.record.Email}</td> </tr> {#/for} </table>',
+						jTemp_old_way : '<textarea id="templateHolder" style="display:none;"> <table border="1"> <tr> <th>First Name</th> <th>Last Name</th> </tr> {#foreach $T as record} <tr> <td>{$T.record.FirstName}</td> <td>{$T.record.Email}</td> </tr> {#/for} </table> </textarea>' 
+					}
+				};
 					
 				/*********************************************
 				* jTemplate 1
@@ -28,70 +26,11 @@
 				// $("#jTemp_1_old_way").append(jTemplates.temp_1.jTemp_old_way);
 				// $("#jTemp_1").setTemplateElement("templateHolder");
 				// $("#jTemp_1").processTemplate(jTemplates.temp_1.data);
-			
+							
 				// New Way Of Doing It
-				// var template_dialog = $.createTemplate(jTemplates.temp_1.jTemp);
-				// var str = template_dialog.get(jTemplates.temp_1.data);
-				// $("#jTemp_1").html($(str).html());
-				
-				/*********************************************
-				* jTemplate 2 - fdic template
-				*********************************************/
-				var pr_index = [
-					{ key: 2, id: "pr13002", date: "January 11, 2013", title: "PR-2-2013 Sunwest Bank, Irvine, California, Assumes All of the Deposits of Westside Community Bank, University Place, Washington", url : "pr13002" },
-					{ key: 1, id: "pr13001", date: "January 4, 2013", title: "PR-1-2013 FDIC Issues List of Banks Examined for CRA Compliance", url : "pr13001" }
-				];
-				
-				var index_template = '<div class="index-container"> {#foreach $T as pr_article} <div class="index-article"> <span class="index-date">{$T.pr_article.date}</span> <span class="index-title"><a id="{$T.pr_article.id}" href="#">{$T.pr_article.title}</a></span> </div> {#/for} </div>';
-				
-				var template_dialog = $.createTemplate(index_template);
-				var str = template_dialog.get(pr_index);
+				var template_dialog = $.createTemplate(jTemplates.temp_1.jTemp);
+				var str = template_dialog.get(jTemplates.temp_1.data);
 				$("#jTemp_1").html($(str).html());
-				
-				var pr = {
-					pr13002 : {
-						type: "Press Release",
-						article_number: "PR-2-2013",
-						last_updated_date: "1/11/2013",
-						title: "Sunwest Bank, Irvine, California, Assumes All of the Deposits of Westside Community Bank, University Place, Washington",
-						full_date: "January 11, 2013",
-						name: "Greg Hernandez",
-						office_phone: "(202) 898-6984",
-						cell_phone: "(202) 340-4922",
-						email: "ghernandez@fdic.gov",
-						body: [
-							{p: "Westside Community Bank, University Place, Washington, was closed today by the Washington State Department of Financial Institutions, which appointed the Federal Deposit Insurance Corporation (FDIC) as receiver. To protect the depositors, the FDIC entered into a purchase and assumption agreement with Sunwest Bank, Irvine, California, to assume all of the deposits of Westside Community Bank."},
-							{p: "The two branches of Westside Community Bank will reopen on Monday as branches of Sunwest Bank. Depositors of Westside Community Bank will automatically become depositors of Sunwest Bank. Deposits will continue to be insured by the FDIC, so there is no need for customers to change their banking relationship in order to retain their deposit insurance coverage up to applicable limits. Customers of Westside Community Bank should continue to use their existing branch until they receive notice from Sunwest Bank that it has completed systems changes to allow other Sunwest Bank branches to process their accounts as well."},
-							{p: "This evening and over the weekend, depositors of Westside Community Bank can access their money by writing checks or using ATM or debit cards. Checks drawn on the bank will continue to be processed. Loan customers should continue to make their payments as usual."},
-							{p: "As of September 30, 2012, Westside Community Bank had approximately $97.7 million in total assets and $96.5 million in total deposits. In addition to assuming all of the deposits of the failed bank, Sunwest Bank agreed to purchase essentially all of the assets."},
-							{p: "Customers with questions about today's transaction should call the FDIC toll-free at 1-800-830-4705. The phone number will be operational this evening until 9:00 p.m., Pacific Standard Time (PST); on Saturday from 9:00 a.m. to 6:00 p.m., PST; on Sunday from noon to 6:00 p.m., PST; on Monday from 8 a.m. to 8 p.m., PST; and thereafter from 9:00 a.m. to 5:00 p.m., PST. Interested parties also can visit the FDIC's Web site at <a href='http://www.fdic.gov/bank/individual/failed/westside.html'>http://www.fdic.gov/bank/individual/failed/westside.html</a>."},
-							{p: "The FDIC estimates that the cost to the Deposit Insurance Fund (DIF) will be $20.3 million. Compared to other alternatives, Sunwest Bank's acquisition was the least costly resolution for the FDIC's DIF. Westside Community Bank is the first FDIC-insured institution to fail in the nation this year, and the first in Washington. The last FDIC-insured institution closed in the state was Bank of Whitman, Colfax, on August 5, 2011."}]
-					},
-					pr13001 : {
-						type: "Press Release",
-						article_number: "PR-1-2013",
-						last_updated_date: "1/4/2013",
-						title: "FDIC Issues List of Banks Examined for CRA Compliance n",
-						full_date: "January 4, 2013",
-						name: "Greg Hernandez",
-						office_phone: "(202) 898-6984",
-						cell_phone: "(202) 340-4922",
-						email: "ghernandez@fdic.gov",
-						body: [
-							{p: "The Federal Deposit Insurance Corporation (FDIC) today issued its list of state nonmember banks recently evaluated for compliance with the Community Reinvestment Act (CRA). The list covers evaluation ratings that the FDIC assigned to institutions in October 2012. The CRA is a 1977 law intended to encourage insured banks and thrifts to meet local credit needs, including those of low- and moderate-income neighborhoods, consistent with safe and sound operations. As part of the Financial Institutions Reform, Recovery, and Enforcement Act of 1989 (FIRREA), Congress mandated the public disclosure of an evaluation and rating for each bank or thrift that undergoes a CRA examination on or after July 1, 1990."},
-							{p: "A consolidated list of all state nonmember banks whose evaluations have been made publicly available since July 1, 1990, including the rating for each bank, can be obtained from the FDIC's Public Information Center, located at 3501 Fairfax Drive, Room E-1002, Arlington, VA 22226 (877-275-3342 or 703-562-2200), or via the Internet at <a href='http://www.fdic.gov'>www.fdic.gov</a>."},
-							{p: "A copy of an individual bank's CRA evaluation is available directly from the bank, which is required by law to make the material available upon request, or from the FDIC's Public Information Center."}]
-					}
-				};
-				
-				var fdic_template = '<div class="container"> <div class="fdic-container"> <div class="fdic-header"> <div class="fdic-type">{$T.type}</div> <hr size="1" color="#003366" noshade="noshade" /> <div class="pr-title">{$T.title}</div> <div class="fdic-release"> <div>FOR IMMEDIATE RELEASE</div> <div class="pr-date">{$T.full_date}</div> </div> <div class="fdic-contact-info"> <div>Media Contact:</div> <div><span class="pr-name">{$T.name}</span> <span class="pr-office-phone">{$T.office_phone}</span></div> <div>Cell: <span class="pr-cell-phone">{$T.cell_phone}</span></div> <div>Email: <a href="mailto:{$T.email}"><span class="pr-email">{$T.email}</span></a></div> </div> </div> <div class="fdic-body"> {#foreach $T.body as paragraph} <p>{$T.paragraph.p}</p> {#/for} </div> <div class="fdic-footer"> <div class="hash-divider">###</div> <div>Congress created the Federal Deposit Insurance Corporation in 1933 to restore public confidence in the nation\'s banking system. The FDIC insures deposits at the nation\'s 7, 181 banks and savings associations, and it promotes the safety and soundness of these institutions by identifying, monitoring and addressing risks to which they are exposed. The FDIC receives no federal tax dollars — insured financial institutions fund its operations.</div> <div>FDIC press releases and other information are available on the Internet at <a href="http://www.fdic.com">www.fdic.gov</a>, by subscription electronically (go to <a href="http://www.fdic.gov/about/subscriptions/index.html">www.fdic.gov/about/subscriptions/index.html</a>) and may also be obtained through the FDIC\'s Public Information Center (877-275-3342 or 703-562-2200). <span class="pr-number">{$T.article_number}</span></div> <div class="last-updated-date">Last Updated {$T.last_updated_date}<span></span> <span><a href="mailto:communications@fdic.gov">communications@fdic.gov</a></span> </div> </div> </div> </div>';
-				
-				$(".index-title a").click(function(){
-				  	var id = $(this).attr('id');
-					var template_dialog = $.createTemplate(fdic_template);
-					var str = template_dialog.get(pr[id]);
-					$("#jTemp_1").html($(str).html());
-				});
 				
 			});
         </script>
@@ -99,7 +38,7 @@
     <body>
 
         <p>jQuery jTemplates Demo</p>
-		<div id="jTemp_1_old_way"></div>
+		<!-- <div id="jTemp_1_old_way"></div> -->
 		<div id="jTemp_1"></div>
 
     </body>
