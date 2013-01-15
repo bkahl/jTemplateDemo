@@ -2,52 +2,88 @@
 <!-- Not Valid XHTML 1.1 ! -->
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
     <head>
-        <title>jQuery jTemplates Demo's</title>
+        <title>jQuery jTemplates Demo</title>
 
 		<script type="text/javascript" src="js/jquery-1.8.2.min.js"></script>
 		<script type="text/javascript" src="js/jquery-jtemplates.js"></script>
         <script type="text/javascript">
 			$(document).ready(function() {
-			    var data = [
-			                  { ID: 1, FirstName: 'Anne', Email: 'anne@domain.com' },
-			                  { ID: 2, FirstName: 'Amelie', Email: 'amelie@domain.com' },
-			                  { ID: 3, FirstName: 'Polly', Email: 'polly@domain.com' },
-			                  { ID: 4, FirstName: 'Alice', Email: 'alice@domain.com' },
-			                  { ID: 5, FirstName: 'Martha', Email: 'martha@domain.com' }
-			               ];
-
-			    $("#jTemplateDemo").setTemplateElement("templateHolder");
-			    $("#jTemplateDemo").processTemplate(data);
+				var jTemplates = {
+					temp_1 : {
+						data : [{ ID: 1, FirstName: 'Anne', Email: 'anne@domain.com' },
+				                { ID: 2, FirstName: 'Amelie', Email: 'amelie@domain.com' },
+				                { ID: 3, FirstName: 'Polly', Email: 'polly@domain.com' },
+				                { ID: 4, FirstName: 'Alice', Email: 'alice@domain.com' },
+				                { ID: 5, FirstName: 'Martha', Email: 'martha@domain.com' }],
+						jTemp : '<table id="templateHolder" border="1" style="display:none;"> <tr> <th>First Name</th> <th>Last Name</th> </tr> {#foreach $T as record} <tr> <td>{$T.record.FirstName}</td> <td>{$T.record.Email}</td> </tr> {#/for} </table>',
+						jTemp_old_way : '<textarea id="templateHolder" style="display:none;"> <table border="1"> <tr> <th>First Name</th> <th>Last Name</th> </tr> {#foreach $T as record} <tr> <td>{$T.record.FirstName}</td> <td>{$T.record.Email}</td> </tr> {#/for} </table> </textarea>' 
+					},
+					fdic : {
+						pr : {
+							year_2013 : [{
+								"1" : {
+									index : {
+										title : "PR-1-2013 FDIC Issues List of Banks Examined for CRA Compliance",
+										date : "January 4, 2013"
+									},
+									article : {
+										title: "Sunwest Bank, Irvine, California, Assumes All of the Deposits of Westside Community Bank, University Place, Washington",
+										date: "January 4, 2013",
+										contact_info: {
+											name : "Greg Hernandez",
+											phone : {
+												work : "(202) 898-6984",
+												cell : "(202) 340-4922"
+											},
+											email : "ghernandez@fdic.gov"
+										}, // close contact info
+										release : [{ p : "Westside Community Bank, University Place, Washington, was closed today by the Washington State Department of Financial Institutions, which appointed the Federal Deposit Insurance Corporation (FDIC) as receiver. To protect the depositors, the FDIC entered into a purchase and assumption agreement with Sunwest Bank, Irvine, California, to assume all of the deposits of Westside Community Bank."},
+											{ p : "The two branches of Westside Community Bank will reopen on Monday as branches of Sunwest Bank. Depositors of Westside Community Bank will automatically become depositors of Sunwest Bank. Deposits will continue to be insured by the FDIC, so there is no need for customers to change their banking relationship in order to retain their deposit insurance coverage up to applicable limits. Customers of Westside Community Bank should continue to use their existing branch until they receive notice from Sunwest Bank that it has completed systems changes to allow other Sunwest Bank branches to process their accounts as well."}]// close release
+									} // close article
+								} // close item
+							}] // close year 2013
+						} // close pr
+					} // close fdic
+				};
+				
+				var pr_2013_data = jTemplates.fdic.pr.year_2013;
+				var template = '<div id="pr_temp">';
+						template += '<div class="pr-title">{$T.pr_2013_data.1.article.title}</div>';
+						template += '<div>';
+						template += '{#foreach $T.pr_2013_data.1.article.release as paragraph}';
+							template += '<p>{$T.paragraph.p}</p>';
+						template += '{#/for}';
+						template += '</div>';
+					template += '</div>';
+				
+				var template_dialog = $.createTemplate(template);
+				var str = template_dialog.get(pr_2013_data);
+				$("#jTemp_1").html($(str).html());
+					
+				/*********************************************
+				* jTemplate 1
+				*********************************************/
+				// Old Way Of Doing It
+				// $("#jTemp_1_old_way").append(jTemplates.temp_1.jTemp_old_way);
+				// $("#jTemp_1").setTemplateElement("templateHolder");
+				// $("#jTemp_1").processTemplate(jTemplates.temp_1.data);
+			
+				// New Way Of Doing It
+				// var template_dialog = $.createTemplate(jTemplates.temp_1.jTemp);
+				// var str = template_dialog.get(jTemplates.temp_1.data);
+				// $("#jTemp_1").html($(str).html());
+				
+				/*********************************************
+				* jTemplate 2
+				*********************************************/
 			});
         </script>
     </head>
     <body>
 
         <p>jQuery jTemplates Demo</p>
-
-		<textarea id="templateHolder" style="display:none;">
-		    <table border="1">
-		        <tr>
-		            <th>
-		                First Name
-		            </th>
-		            <th>
-		                Last Name
-		            </th>
-		        </tr>
-		        {#foreach $T as record} 
-		          <tr>
-		              <td>
-		                  {$T.record.FirstName}
-		              </td>
-		              <td>
-		                  {$T.record.Email}
-		              </td>
-		          </tr>
-		        {#/for}
-		    </table>
-		</textarea>
-		<div id="jTemplateDemo"></div>
+		<div id="jTemp_1_old_way"></div>
+		<div id="jTemp_1"></div>
 
     </body>
 </html>
