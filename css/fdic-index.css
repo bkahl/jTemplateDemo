@@ -1,0 +1,8 @@
+.index-container: { width: 670px; }
+.index-article {
+  width: auto;
+  overflow: hidden;
+}
+
+.index-article .index-date{ width: 30%; float: left; }
+.index-article .index-title{ width: 70%; float: right; }

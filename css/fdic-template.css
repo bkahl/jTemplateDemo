@@ -1,0 +1,42 @@
+.container{
+  width: 990px;
+  font-family: arial, helvetica, sans-serif;
+  font-size: 12px;
+}
+.fdic-container{
+  width: 670px;
+  margin: 0;
+  /* margin: 0 auto; */
+}
+.fdic-header{
+  width: auto;
+  overflow: hidden;
+  font-weight: bold;
+}
+.fdic-header .pr-title{ margin: 20px 0; color: #003366; font-size: medium; }
+.fdic-header .fdic-type{ color: #003366; font-size: large; }
+.fdic-release{
+  float: left;
+  text-align: left;
+  width: 50%;
+}
+.fdic-contact-info{
+  float: right;
+  text-align: right;
+  width: 50%;
+}
+.fdic-body { margin-top: 20px; }
+.fdic-body > p:first-child{ margin-top: none; }
+.fdic-body > p{ margin-top: 10px; }
+.fdic-footer .hash-divider{
+  width: 50px;
+  margin: 15px auto;
+}
+.fdic-footer > div{
+  margin-top: 10px;
+}
+.fdic-footer .pr-number{ font-weight: bold; }
+
+.fdic-footer .last-updated-date{ margin-top: 40px; font-size: 11px; width: auto; overflow: hidden; }
+.fdic-footer .last-updated-date > span:first-child{ float: left; }
+.fdic-footer .last-updated-date > span:last-child{ float: right; }
