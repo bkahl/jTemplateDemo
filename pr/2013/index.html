@@ -17,7 +17,7 @@
 					pr_index = [
 					{ key: 2, id: "pr13002", date: "January 11, 2013", title: "PR-2-2013 Sunwest Bank, Irvine, California, Assumes All of the Deposits of Westside Community Bank, University Place, Washington", url : "pr13002" },
 					{ key: 1, id: "pr13001", date: "January 4, 2013", title: "PR-1-2013 FDIC Issues List of Banks Examined for CRA Compliance", url : "pr13001" }],
-					pr_index_template = '<div class="index-container"> {#foreach $T as pr_article} <div class="index-article"> <span class="index-date">{$T.pr_article.date}</span> <span class="index-title"><a id="{$T.pr_article.id}" href="file:///Users/bradkahl/Desktop/Brad \Kahl/Projects/GIT/jTemplateDemo/pr/2013/pr.html#{$T.pr_article.id}">{$T.pr_article.title}</a></span> </div> {#/for} </div>';
+					pr_index_template = '<div class="index-container"> {#foreach $T as pr_article} <div class="index-article"> <span class="index-date">{$T.pr_article.date}</span> <span class="index-title"><a id="{$T.pr_article.id}" href="file://localhost/Users/bradkahl/Desktop/Brad%20Kahl/GIT/jTemplateDemo/pr/2013/pr.html#{$T.pr_article.id}">{$T.pr_article.title}</a></span> </div> {#/for} </div>';
 				
 				template_dialog = $.createTemplate(pr_index_template);
 				str = template_dialog.get(pr_index);
