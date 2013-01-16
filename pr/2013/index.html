@@ -7,22 +7,21 @@
 		<link rel='stylesheet' href='../../css/fdic-index.css'>
 		<script type="text/javascript" src="../../js/jquery-1.8.2.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery-jtemplates.js"></script>
+		<script type="text/javascript" src="../../js/fdic.js"></script>
         <script type="text/javascript">
-			$(document).ready(function() {
-				/*********************************************
-				* jTemplate 2 - FDIC - PR Index Template
-				*********************************************/
-				var template_dialog,
-					str,
-					pr_index = [
-					{ key: 2, id: "pr13002", date: "January 11, 2013", title: "PR-2-2013 Sunwest Bank, Irvine, California, Assumes All of the Deposits of Westside Community Bank, University Place, Washington", url : "pr13002" },
-					{ key: 1, id: "pr13001", date: "January 4, 2013", title: "PR-1-2013 FDIC Issues List of Banks Examined for CRA Compliance", url : "pr13001" }],
-					pr_index_template = '<div class="index-container"> {#foreach $T as pr_article} <div class="index-article"> <span class="index-date">{$T.pr_article.date}</span> <span class="index-title"><a id="{$T.pr_article.id}" href="file://localhost/Users/bradkahl/Desktop/Brad%20Kahl/GIT/jTemplateDemo/pr/2013/pr.html#{$T.pr_article.id}">{$T.pr_article.title}</a></span> </div> {#/for} </div>';
-				
-				template_dialog = $.createTemplate(pr_index_template);
-				str = template_dialog.get(pr_index);
-				$("#pr_index").html($(str).html());
-			});
+			var url = "prIndex.json",
+				script = document.createElement('script'),
+				template_dialog,
+				str;
+
+			script.setAttribute('src', url);
+			document.getElementsByTagName('head')[0].appendChild(script);
+
+			function prIndex(data) {					
+				template_dialog = $.createTemplate(fdic.settings.pr_index_template);
+				str = template_dialog.get(data.pr_index);
+				$("#pr_index").html($(str).html());			
+			}
         </script>
     </head>
     <body>

@@ -1,0 +1,5 @@
+prIndex({
+	pr_index : [
+	{ key: 2, id: "pr13002", date: "January 11, 2013", title: "PR-2-2013 Sunwest Bank, Irvine, California, Assumes All of the Deposits of Westside Community Bank, University Place, Washington" },
+	{ key: 1, id: "pr13001", date: "January 4, 2013", title: "PR-1-2013 FDIC Issues List of Banks Examined for CRA Compliance" }]
+});

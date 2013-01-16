@@ -6,47 +6,22 @@
 		<link rel='stylesheet' href='../../css/fdic-template.css'>
 		<script type="text/javascript" src="../../js/jquery-1.8.2.min.js"></script>
 		<script type="text/javascript" src="../../js/jquery-jtemplates.js"></script>
+		<script type="text/javascript" src="../../js/fdic.js"></script>
         <script type="text/javascript">
-			(function($, parent){
-				if (parent['libs'] !== undefined) {
-					return;
-				}
-				var libs = parent.libs = {};
-				var getSelectedPr = function() {
-					var location = document.location.href;
-					return location.split("#")[1];
-				};
-				var init = function(){
-					$ = jQuery;
-					$.extend(libs, {
-						jQuery:$,
-						getSelectedPr:getSelectedPr
-					});
-				}
-				init();
-			})(undefined, window);
-			
-			var selected_pr = libs.getSelectedPr(),
-				url,
-				script,
+			var selected_pr = fdic.getSelectedRelease(),
+				url = "pressReleases.json",
+				script = document.createElement('script'),
 				template_dialog,
-				str,
-				fdic_template;
-			// console.log(selected_pr);
-				
-			function pressReleases(data) {
-				fdic_template = '<div class="container"> <div class="fdic-container"> <div class="fdic-header"> <div class="fdic-type">{$T.type}</div> <hr size="1" color="#003366" noshade="noshade" /> <div class="pr-title">{$T.title}</div> <div class="fdic-release"> <div>FOR IMMEDIATE RELEASE</div> <div class="pr-date">{$T.full_date}</div> </div> <div class="fdic-contact-info"> <div>Media Contact:</div> <div><span class="pr-name">{$T.name}</span> <span class="pr-office-phone">{$T.office_phone}</span></div> <div>Cell: <span class="pr-cell-phone">{$T.cell_phone}</span></div> <div>Email: <a href="mailto:{$T.email}"><span class="pr-email">{$T.email}</span></a></div> </div> </div> <div class="fdic-body"> {#foreach $T.body as paragraph} <p>{$T.paragraph.p}</p> {#/for} </div> <div class="fdic-footer"> <div class="hash-divider">###</div> <div>Congress created the Federal Deposit Insurance Corporation in 1933 to restore public confidence in the nation\'s banking system. The FDIC insures deposits at the nation\'s 7, 181 banks and savings associations, and it promotes the safety and soundness of these institutions by identifying, monitoring and addressing risks to which they are exposed. The FDIC receives no federal tax dollars — insured financial institutions fund its operations.</div> <div>FDIC press releases and other information are available on the Internet at <a href="http://www.fdic.com">www.fdic.gov</a>, by subscription electronically (go to <a href="http://www.fdic.gov/about/subscriptions/index.html">www.fdic.gov/about/subscriptions/index.html</a>) and may also be obtained through the FDIC\'s Public Information Center (877-275-3342 or 703-562-2200). <span class="pr-number">{$T.article_number}</span></div> <div class="last-updated-date">Last Updated {$T.last_updated_date}<span></span> <span><a href="mailto:communications@fdic.gov">communications@fdic.gov</a></span> </div> </div> </div> </div>';
-					
-				template_dialog = $.createTemplate(fdic_template);
+				str;
+
+			script.setAttribute('src', url);
+			document.getElementsByTagName('head')[0].appendChild(script);
+							
+			function pressReleases(data) {	
+				template_dialog = $.createTemplate(fdic.settings.pr_template);
 				str = template_dialog.get(data[selected_pr]);
 				$("#pr_release").html($(str).html());			
 			}
-			
-			url = "pr_data.json";
-			script = document.createElement('script');
-			script.setAttribute('src', url);
-			// load the script
-			document.getElementsByTagName('head')[0].appendChild(script);
         </script>
     </head>
     <body>
